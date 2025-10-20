@@ -25,7 +25,7 @@ export class ApifoxService {
           '请至少提供以下一种鉴权方式：\n' +
           '  • APIFOX_API_KEY - Apifox 开发者令牌（推荐）\n' +
           '  • APIFOX_COOKIE_TOKEN - 浏览器 Cookie 中的 Authorization 字段\n\n' +
-          '💡 快速配置：运行 `pnpm init` 使用交互式向导'
+          '💡 快速配置：运行 `pnpm intro` 使用交互式向导'
       );
     }
 

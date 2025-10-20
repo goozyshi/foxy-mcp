@@ -5,8 +5,8 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 yargs(hideBin(process.argv))
-  .command('init', '🦊 交互式初始化向导', {}, async () => {
-    const { initCommand } = await import('./commands/init.js');
+  .command('intro', '🦊 交互式初始化向导', {}, async () => {
+    const { initCommand } = await import('./commands/intro.js');
     await initCommand();
     process.exit(0);
   })

@@ -87,7 +87,7 @@ pnpm intro
   "mcpServers": {
     "foxy-mcp": {
       "command": "node",
-      "args": ["/path/to/foxy-mcp/build/index.js", "--local"],
+      "args": ["/path/to/foxy-mcp-nodejs/build/index.js", "--local"],
       "env": {
         "APIFOX_API_KEY": "APS-xxx",
         "PROJECT_ID": "31890xx"
@@ -381,8 +381,8 @@ pnpm start
 
 **缓存位置：**
 
-- **macOS**: `~/Library/Preferences/foxy-mcp/config.json`
-- **Linux**: `~/.config/foxy-mcp/config.json`
+- **macOS**: `~/Library/Preferences/foxy-mcp-nodejs/config.json`
+- **Linux**: `~/.config/foxy-mcp-nodejs/config.json`
 - **Windows**: `%APPDATA%\foxy-mcp\config.json`
 
 **存储结构：**
@@ -620,7 +620,7 @@ Apifox → 个人设置 → 开发者令牌 | 参考[Apifox开放API-鉴权](htt
 <details>
 <summary><strong>Q: 缓存数据存在哪里？</strong></summary>
 
-macOS: `~/Library/Preferences/foxy-mcp/config.json`
+macOS: `~/Library/Preferences/foxy-mcp-nodejs/config.json`
 
 可以手动删除该文件清空所有缓存
 
