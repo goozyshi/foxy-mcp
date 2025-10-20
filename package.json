@@ -1,0 +1,66 @@
+{
+  "name": "foxy-mcp",
+  "version": "1.0.0",
+  "description": "智能Apifox MCP中转服务器 - 支持多项目、智能缓存、团队协作",
+  "type": "module",
+  "main": "build/index.js",
+  "bin": {
+    "foxy-mcp": "build/cli.js"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc && tsc-alias",
+    "start": "node build/cli.js start",
+    "intro": "node build/cli.js intro"
+  },
+  "keywords": [
+    "apifox",
+    "mcp",
+    "model-context-protocol",
+    "api-bridge",
+    "cursor",
+    "openapi",
+    "multi-project"
+  ],
+  "author": "goozyshi@gmail.com",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0",
+  "files": [
+    "build",
+    "README.md"
+  ],
+  "dependencies": {
+    "@faker-js/faker": "^10.1.0",
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "chalk": "^5.3.0",
+    "conf": "^13.0.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "inquirer": "^10.2.2",
+    "ky": "^1.7.2",
+    "lru-cache": "^10.4.3",
+    "openapi-sampler": "^1.6.2",
+    "p-limit": "^6.1.0",
+    "yargs": "^17.7.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/inquirer": "^9.0.7",
+    "@types/ms": "^0.7.34",
+    "@types/node": "^20.17.6",
+    "@types/yargs": "^17.0.33",
+    "@typescript-eslint/eslint-plugin": "^8.14.0",
+    "@typescript-eslint/parser": "^8.14.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.15.0",
+    "prettier": "^3.3.3",
+    "tsc-alias": "^1.8.10",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
