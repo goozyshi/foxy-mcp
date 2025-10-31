@@ -13,7 +13,7 @@ yargs(hideBin(process.argv))
   .command(
     ['start', '$0'],
     '🚀 启动 Foxy MCP 服务器',
-    (yargs) => {
+    yargs => {
       return yargs.options({
         'apifox-api-key': {
           type: 'string',
@@ -40,7 +40,12 @@ yargs(hideBin(process.argv))
         },
       });
     },
-    async () => {
+    async argv => {
+      // 如果指定了 --local，设置环境变量触发 CLI 模式
+      if (argv.local) {
+        process.env.NODE_ENV = 'cli';
+      }
+
       config({ path: resolve(process.cwd(), '.env') });
       await import('./index.js');
     }
