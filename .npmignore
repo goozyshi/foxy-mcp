@@ -1,0 +1,56 @@
+# 源代码（只发布编译后的代码）
+src/
+tsconfig.json
+
+# 开发依赖
+node_modules/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 环境和配置
+.env
+.env.local
+.foxy-mcp.json
+
+# 日志
+*.log
+logs/
+npm-debug.log*
+pnpm-debug.log*
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+
+# OS 文件
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# 其他项目目录（重要！）
+Feishu-MCP-main/
+lark-tools-mcp-main/
+open-feishu-mcp-server/
+
+# 开发工具
+.cursor/
+eslint.config.js
+prettier.config.js
+
+# 测试文件
+*.test.ts
+*.test.js
+*.spec.ts
+*.spec.js
+__tests__/
+
+# 文档草稿
+*.draft.md
+

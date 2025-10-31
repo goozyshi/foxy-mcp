@@ -10,10 +10,50 @@ yargs(hideBin(process.argv))
     await initCommand();
     process.exit(0);
   })
-  .command(['start', '$0'], '🚀 启动 Foxy MCP 服务器', {}, async () => {
-    config({ path: resolve(process.cwd(), '.env') });
-    await import('./index.js');
-  })
+  .command(
+    ['start', '$0'],
+    '🚀 启动 Foxy MCP 服务器',
+    (yargs) => {
+      return yargs.options({
+        'apifox-api-key': {
+          type: 'string',
+          describe: 'Apifox API密钥',
+          alias: 'k',
+        },
+        'project-id': {
+          type: 'string',
+          describe: 'Apifox项目ID',
+          alias: 'p',
+        },
+        'apifox-cookie-token': {
+          type: 'string',
+          describe: 'Apifox Cookie Token (用于调试)',
+        },
+        port: {
+          type: 'number',
+          describe: 'HTTP服务器端口（不指定则使用CLI模式）',
+        },
+        local: {
+          type: 'boolean',
+          describe: 'CLI模式（使用stdio传输）',
+          default: false,
+        },
+      });
+    },
+    async () => {
+      config({ path: resolve(process.cwd(), '.env') });
+      await import('./index.js');
+    }
+  )
+  .example(
+    '$0 --apifox-api-key=APS-xxx --project-id=123456 --local',
+    '使用 API Key 启动 CLI 模式'
+  )
+  .example(
+    '$0 --apifox-api-key=APS-xxx --port=3000',
+    '使用 API Key 启动 HTTP 模式'
+  )
+  .example('$0 intro', '运行交互式配置向导')
   .help('h')
   .alias('h', 'help')
   .version('1.0.0')
