@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc && tsc-alias",
-    "start": "node build/cli.js start",
+    "start": "node build/index.js",
     "intro": "node build/cli.js intro",
     "prepublishOnly": "pnpm build",
     "test": "echo \"No tests yet\" && exit 0"
