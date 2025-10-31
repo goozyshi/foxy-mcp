@@ -41,13 +41,14 @@ yargs(hideBin(process.argv))
       });
     },
     async argv => {
-      // 如果指定了 --local，设置环境变量触发 CLI 模式
-      if (argv.local) {
-        process.env.NODE_ENV = 'cli';
+      // 如果指定了 --local，添加到 argv 以便 index.ts 检测
+      if (argv.local && !process.argv.includes('--local')) {
+        process.argv.push('--local');
       }
 
       config({ path: resolve(process.cwd(), '.env') });
-      await import('./index.js');
+      const { startServer } = await import('./index.js');
+      await startServer();
     }
   )
   .example(

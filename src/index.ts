@@ -49,7 +49,7 @@ function setupErrorHandlers(): void {
   });
 }
 
-async function startServer(): Promise<void> {
+export async function startServer(): Promise<void> {
   try {
     setupErrorHandlers();
     setupGracefulShutdown();
@@ -99,8 +99,10 @@ async function startServer(): Promise<void> {
     foxyServerInstance = foxyServer;
 
     if (isCliMode) {
+      // CLI 模式：使用 stdio 传输
       const transport = new StdioServerTransport();
-      await foxyServer.getServer().connect(transport);
+      await foxyServer.connect(transport);
+      logger.info('CLI 模式已启动，等待 stdio 连接...');
     } else {
       const cacheStats = foxyServer.getCacheStats();
       const storageService = await import('./services/storage.service.js');
@@ -153,18 +155,32 @@ async function startServer(): Promise<void> {
   } catch (error: any) {
     logger.error('Failed to start', { error: error.message });
 
-    console.log('\n' + chalk.bold.red('═'.repeat(60)));
-    console.log(chalk.bold.red('❌ 启动失败'));
-    console.log(chalk.bold.red('═'.repeat(60)) + '\n');
+    const isCliMode =
+      process.env.NODE_ENV === 'cli' || process.argv.includes('--local');
 
-    console.log(chalk.white(error.message));
-    console.log('');
+    if (isCliMode) {
+      // CLI 模式：只输出到 stderr，避免干扰 stdio
+      console.error(chalk.bold.red('❌ CLI 模式启动失败:'), error.message);
+    } else {
+      // HTTP 模式：正常输出
+      console.log('\n' + chalk.bold.red('═'.repeat(60)));
+      console.log(chalk.bold.red('❌ 启动失败'));
+      console.log(chalk.bold.red('═'.repeat(60)) + '\n');
+
+      console.log(chalk.white(error.message));
+      console.log('');
+    }
 
     process.exit(1);
   }
 }
 
-startServer().catch(error => {
-  console.error('❌ Unhandled error:', error);
-  process.exit(1);
-});
+// 直接运行 index.js 时，启动服务器
+// 如果检测到 --local 参数，会在 startServer() 中进入 CLI 模式
+// 如果通过 cli.ts 调用，cli.ts 会设置 NODE_ENV=cli，这里不会重复启动
+if (process.env.NODE_ENV !== 'cli') {
+  startServer().catch(error => {
+    console.error('❌ Unhandled error:', error);
+    process.exit(1);
+  });
+}

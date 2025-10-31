@@ -851,7 +851,12 @@ ${JSON.stringify(mockData, null, 2)}
    */
   async connect(transport: any): Promise<void> {
     await this.server.connect(transport);
-    logger.debug('Server connected');
+    // CLI 模式下输出到 stderr，避免干扰 stdio 通信
+    if (process.env.NODE_ENV === 'cli') {
+      console.error('🦊 Foxy MCP Server - CLI 模式已连接，等待请求...');
+    } else {
+      logger.debug('Server connected');
+    }
   }
 
   getServer(): McpServer {
