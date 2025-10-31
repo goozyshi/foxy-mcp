@@ -1,6 +1,6 @@
 {
   "name": "foxy-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "智能Apifox MCP中转服务器 - 支持多项目、智能缓存、团队协作",
   "type": "module",
   "main": "build/index.js",
